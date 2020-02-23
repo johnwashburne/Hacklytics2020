@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+    {% block content %}
+    <div class="container" style="position: absolute; top: 50%; left: 40%; transform: translate(-30%,-50%);">
+        <div class="card border-dark">
+            <div class="card-body">
+                <form class="overflow-auto" style="height: 600px" id="main-form" action="/formSubmit" method="post">
+                  <img src="{{url_for('static', filename='brand.png')}}"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+    function httpGet(theUrl)
+      {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
+      }
+
+      window.onload = function getQuestions(){
+        document.getElementById("main-form").innerHTML = httpGet("/getTargets");
+        console.log("a");
+      }
+    </script>
+
+    {% endblock %}

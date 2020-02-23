@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);">
+    <div class="card text-center border-dark p-3">
+        <div clas="card-body">
+            <img src="{{url_for('static', filename='stacked.png')}}" style="width:50%">
+        </div>
+        <div class="card-body">
+            All the other sled dogs gotta follow the lead dog
+        </div>
+        <div class="card-body">
+            This web app uses a support vector machine trained on the accounts that a user follows in order to grow the user's reach and impact on Instagram. The support vector machine produces a probability representative of whether a particular Instagram account will follow back, allowing the original user to only follow users likely to return the favor. Eventually, the goal is to automate the following and unfollowing process which would allow the user to passively grow their profile.
+        </div>
+    </div>
+</div>
+{% endblock %}

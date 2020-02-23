@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);">
+  <div class="card text-center border-dark p-3">
+      <div clas="card-body">
+          <img src="{{url_for('static', filename='icon.png')}}" style="width:25%">
+      </div>
+      <div class="card-body">
+        A machine learning based approach to growing one's Instagram following
+      </div>
+      <div class="card-body" style="padding-top: 60px">
+        Welcome: <strong>johnwashburne</strong>. Input an Instagram username:
+        <form action="/results" method="POST">
+          <div class="d-flex justify-content-center">
+            <div class="input-group mb-3" style="width: 50%;">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">@</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="username">
+            </div>
+          </div>
+        </form>
+      </div>
+
+  </div>
+</div>
+{% endblock %}
