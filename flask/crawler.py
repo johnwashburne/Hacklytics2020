@@ -52,7 +52,11 @@ def gather_data(username, s):
 
     response = s.get('https://www.instagram.com/{}/?__a=1'.format(username))
     print(response)
+    if response.status_code == 429:
+        return None
     response = response.json()
+    
+    
     #response = json.load(open('sample.json', 'r'))
     info = {}
     sub = response['graphql']['user']
@@ -67,6 +71,7 @@ def gather_data(username, s):
     info['recently_joined'] = int(sub['is_joined_recently'])
     info['profile_pic'] = sub['profile_pic_url_hd']
     info['ratio'] = info['followers'] / info['following']
+    info['pk'] = int(sub['id'])
 
     proba = m.predict([[info['followers'], info['following'], info['private'],
                                 info['verified'], info['post_count'], info['mutual'],
@@ -79,7 +84,7 @@ def gather_data(username, s):
 
 def task():
     print('starting task')
-    if len(c.users) == 0:
+    while len(c.users) == 0:
         docs = collection.aggregate([{"$sample": { "size": 1 } }])
         doc = None
         for d in docs:
@@ -92,7 +97,14 @@ def task():
 
     user = c.users.pop(0)
     print(user['username'])
-    collection.insert_one(gather_data(user['username'], s))
+    d = gather_data(user['username'], s)
+    
+    if d != None:
+        collection.insert_one(d)
+        
+    # wierd way of breaking the loop if 429 code is hit
+    else:
+        c.count = 500
     
 
 followings = json.load(open('followings.json', 'r'))
@@ -103,11 +115,11 @@ print(len(c.users))
 schedule.every(36).seconds.do(task)
 
 print('entering loop')
-time.sleep(7200)
 while True:
     schedule.run_pending()
     if c.count > 300:
         break
+ 
     
     time.sleep(1)
 

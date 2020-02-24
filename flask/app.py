@@ -54,7 +54,7 @@ def about():
 def get_targets():
     top20 = collection.find().sort([("proba", -1)]).limit(20)
     docs = []
-    a = ''''''
+    a = '''<h2>Most Likely to Follow Back'''
     for doc in top20:
         docs.append(doc)
         a += """<div class="row" style="padding: 10px;">
