@@ -6,4 +6,7 @@ This web app uses a support vector machine trained on the accounts that a user f
 \
 Read more about it on [Devpost](https://devpost.com/software/lead-dog).
 \
+\
+Disclaimer: the crawlers need a lot of work before they will be fully functional
+\
 ![ss](results.PNG)
