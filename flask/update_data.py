@@ -13,8 +13,8 @@ api.login()
 followers = api.getTotalFollowers(api.username_id)
 followings = api.getTotalFollowings(api.username_id)
 
-json.dump(followers, open('followers2.json', 'w'))
-json.dump(followings, open('followings2.json', 'w'))
+json.dump(followers, open('followers.json', 'w'))
+json.dump(followings, open('followings.json', 'w'))
 
 
 
